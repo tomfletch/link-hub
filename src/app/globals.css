@@ -1,8 +1,10 @@
 :root {
   --clr-neutral-100: hsl(320, 10%, 18%);
   --clr-neutral-300: hsl(253, 10%, 36%);
-  --clr-primary-400: hsl(235, 60%, 59%);
+  --clr-neutral-900: hsl(320, 10%, 95%);
   --clr-primary-300: hsl(235, 60%, 53%);
+  --clr-primary-400: hsl(235, 60%, 59%);
+  --clr-primary-900: hsl(235, 60%, 95%);
   --clr-secondary-400: hsl(225, 27%, 55%);
 
   --fw-regular: 400;
@@ -14,4 +16,6 @@
 
 body {
   margin: 0;
+  background-color: var(--clr-neutral-100);
+  color: var(--clr-neutral-900);
 }
