@@ -1,0 +1,23 @@
+.linkFoldersNav {
+  position: relative;
+  width: 300px;
+}
+
+.linkFoldersList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.linkFolderLink {
+  display: block;
+  color: var(--clr-neutral-900);
+  text-decoration: none;
+  padding: 0.5rem;
+  border-left: 4px solid transparent;
+}
+
+.linkFolderLink.active {
+  background-color: var(--clr-neutral-300);
+  border-left-color: var(--clr-primary-400);
+}
