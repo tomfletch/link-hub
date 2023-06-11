@@ -1,5 +1,7 @@
 import Header from '@/components/Header/Header'
 import LinkFolders from '@/components/LinkFolders/LinkFolders'
+import styles from './page.module.css';
+import LinksList from '@/components/LinksList/LinksList';
 
 type LinkFolderPageProps = {
   params: {
@@ -11,7 +13,10 @@ export default function LinkFolderPage({ params }: LinkFolderPageProps) {
   return (
     <>
       <Header />
-      <LinkFolders currentFolderId={params.id} />
+      <main className={styles.mainContainer}>
+        <LinkFolders currentFolderId={params.id} />
+        <LinksList currentFolderId={params.id} />
+      </main>
     </>
   )
 }

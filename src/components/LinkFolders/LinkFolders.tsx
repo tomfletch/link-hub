@@ -1,9 +1,10 @@
-import { authOptions } from '@/auth';
-import { prisma } from '@/db';
+'use client';
+
 import { LinkFolder } from '@prisma/client';
-import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import styles from './LinkFolders.module.css';
+import useSWR from 'swr';
+import fetcher from '@/utils';
 
 type LinkFoldersListProps = {
   parentLinkFolderId: string | null;
@@ -44,19 +45,18 @@ type LinkFoldersProps = {
   currentFolderId?: string;
 };
 
-export default async function LinkFolders({ currentFolderId }: LinkFoldersProps) {
-  const session = await getServerSession(authOptions);
-  const linkFolders = await prisma.linkFolder.findMany({
-    where: { userId: session?.user.id }
-  });
+export default function LinkFolders({ currentFolderId }: LinkFoldersProps) {
+  const { data: linkFolders } = useSWR<LinkFolder[]>('/api/users/me/link-folders', fetcher, {});
 
   return (
     <nav className={styles.linkFoldersNav}>
-      <LinkFoldersList
-        parentLinkFolderId={null}
-        linkFolders={linkFolders}
-        currentFolderId={currentFolderId}
-      />
+      {linkFolders && (
+        <LinkFoldersList
+          parentLinkFolderId={null}
+          linkFolders={linkFolders}
+          currentFolderId={currentFolderId}
+        />
+      )}
     </nav>
   )
 }

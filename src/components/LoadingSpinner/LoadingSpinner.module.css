@@ -1,0 +1,13 @@
+.spinnerContainer {
+  text-align: center;
+  padding: 5rem;
+}
+
+.spinnerIcon {
+  animation: 1s linear spin infinite;
+}
+
+@keyframes spin {
+  0% { rotate: 0deg; }
+  100% { rotate: 360deg; }
+}
