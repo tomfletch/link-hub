@@ -1,12 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import { LinkFolder } from '@/types/linkFolder';
 import fetcher from '@/utils';
 import useSWR from 'swr';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { NewLinkForm } from '../NewLinkForm/NewLinkForm';
 import styles from './LinksList.module.css';
+import Favicon from '../Favicon/Favicon';
 
 type LinksListProps = {
   currentFolderId: string;
@@ -28,7 +28,7 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
         {linkFolder.links.map((link) => (
           <div key={link.id} className={styles.link}>
             <div className={styles.faviconContainer}>
-              <Image height="32" width="32" src={`http://www.google.com/s2/favicons?sz=32&domain=${link.url}`} alt="" />
+              <Favicon url={link.url} size={32} />
             </div>
             <div className={styles.linkName}>{link.name}</div>
             <div className={styles.linkUrl}>{link.url}</div>
