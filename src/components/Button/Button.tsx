@@ -4,7 +4,7 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
 type ButtonProps = {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   type?: 'submit' | 'button';
   kind?: 'primary' | 'secondary';
   disabled?: boolean;

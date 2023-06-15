@@ -2,7 +2,6 @@ import { FormEvent, useState } from 'react';
 import { VscAdd } from 'react-icons/vsc';
 import Button from '../Button/Button';
 import styles from './NewLinkForm.module.css';
-import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
 type NewLinkFormProps = {
   linkFolderId: string;
@@ -59,7 +58,6 @@ export function NewLinkForm({ linkFolderId, onAdd }: NewLinkFormProps) {
       <Button
         type="submit"
         kind="primary"
-        onClick={() => {}}
         disabled={!url || !name}
         isLoading={isSaving}
         loadingText="Saving..."

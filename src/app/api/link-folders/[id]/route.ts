@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { getCurrentSession } from '@/auth';
 import { prisma } from '@/db';
 
 type RouteParams = {
@@ -7,8 +6,6 @@ type RouteParams = {
 };
 
 export async function GET(request: Request, { params }: { params: RouteParams }) {
-  const session = await getCurrentSession();
-
   const linkFolder = await prisma.linkFolder.findUnique({
     where: { id: params.id },
     include: { links: true }
