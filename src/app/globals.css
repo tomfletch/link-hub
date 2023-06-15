@@ -49,3 +49,7 @@ input:focus {
 input:disabled {
   color: var(--clr-neutral-800);
 }
+
+img {
+  display: block;
+}
