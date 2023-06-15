@@ -51,7 +51,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  LinkFolder    LinkFolder[]
+  linkFolders   LinkFolder[]
+  links         Link[]
 }
 
 model VerificationToken {
@@ -74,7 +75,23 @@ model LinkFolder {
   name               String
   createdAt          DateTime     @default(now())
   updatedAt          DateTime     @updatedAt
+  links              Link[]
 
   @@index(userId)
   @@index(parentLinkFolderId)
+}
+
+model Link {
+  id           String     @id @default(cuid())
+  url          String
+  name         String
+  addedById    String
+  addedBy      User       @relation(fields: [addedById], references: [id])
+  linkFolderId String
+  linkFolder   LinkFolder @relation(fields: [linkFolderId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index(addedById)
+  @@index(linkFolderId)
 }

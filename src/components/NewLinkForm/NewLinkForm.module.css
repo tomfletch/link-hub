@@ -1,0 +1,32 @@
+.newLinkForm {
+  --form-bg: var(--clr-neutral-300);
+  padding: 1rem;
+  background-color: var(--form-bg);
+  border-radius: var(--br-regular);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: stretch;
+}
+
+.field {
+  position: relative;
+  flex-grow: 1;
+}
+
+.field input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.newLinkForm label span {
+  position: absolute;
+  left: 0.5rem;
+  top: -0.5rem;
+  padding-inline: 0.25rem;
+  background-color: var(--form-bg);
+  font-size: 0.9rem;
+}
+
+.newLinkForm label:focus-within span {
+  color: var(--clr-primary-800);
+}

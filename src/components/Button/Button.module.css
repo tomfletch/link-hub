@@ -1,15 +1,33 @@
 .button {
   cursor: pointer;
   padding: 0.2rem 1rem;
-  background-color: var(--clr-neutral-900);
   border: none;
   border-radius: var(--br-small);
   color: var(--clr-neutral-100);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
-.button:hover, .button:focus-visible {
+.button.secondary {
+  background-color: var(--clr-neutral-900);
+}
+
+.button.secondary:hover, .button.secondary:focus-visible {
   background-color: var(--clr-primary-900);
+}
+
+.button.primary {
+  background-color: var(--clr-primary-400);
+  color: var(--clr-neutral-900);
+}
+
+.button.primary:hover, .button.primary:focus-visible {
+  background-color: var(--clr-primary-500);
+}
+
+.button:disabled, .button.primary:disabled, .button.secondary:disabled {
+  cursor: default;
+  background-color: var(--clr-neutral-400);
 }

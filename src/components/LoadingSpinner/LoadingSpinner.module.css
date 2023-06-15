@@ -1,5 +1,11 @@
 .spinnerContainer {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spinnerContainer.large {
+  flex-direction: column;
   padding: 5rem;
 }
 

@@ -1,9 +1,14 @@
 :root {
   --clr-neutral-100: hsl(320, 10%, 18%);
+  --clr-neutral-200: hsl(320, 10%, 25%);
   --clr-neutral-300: hsl(253, 10%, 36%);
+  --clr-neutral-400: hsl(253, 10%, 50%);
+  --clr-neutral-800: hsl(320, 10%, 75%);
   --clr-neutral-900: hsl(320, 10%, 95%);
   --clr-primary-300: hsl(235, 60%, 53%);
   --clr-primary-400: hsl(235, 60%, 59%);
+  --clr-primary-500: hsl(235, 60%, 65%);
+  --clr-primary-800: hsl(235, 60%, 80%);
   --clr-primary-900: hsl(235, 60%, 95%);
   --clr-secondary-400: hsl(225, 27%, 55%);
 
@@ -24,4 +29,19 @@ h1 {
   font-weight: var(--fw-regular);
   font-size: 3rem;
   margin: 0;
+  margin-bottom: 2rem;
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid var(--clr-neutral-900);
+  border-radius: var(--br-small);
+  padding: 0.5rem 0.75rem;
+  color: var(--clr-neutral-900);
+  font: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--clr-primary-800);
 }

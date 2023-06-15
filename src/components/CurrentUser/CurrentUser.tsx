@@ -19,7 +19,7 @@ export default function CurrentUser() {
           <Avatar src={session.user.image || null} />
         </>
       ): (
-        <Button onClick={() => signIn()}>
+        <Button kind="secondary" onClick={() => signIn()}>
           Sign in
           <VscSignIn size={18} />
         </Button>

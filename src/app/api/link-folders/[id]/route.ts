@@ -10,7 +10,8 @@ export async function GET(request: Request, { params }: { params: RouteParams })
   const session = await getCurrentSession();
 
   const linkFolder = await prisma.linkFolder.findUnique({
-    where: { id: params.id }
+    where: { id: params.id },
+    include: { links: true }
   });
 
   return NextResponse.json(linkFolder);

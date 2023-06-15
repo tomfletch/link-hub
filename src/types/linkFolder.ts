@@ -1,3 +1,9 @@
+type Link = {
+  id: string;
+  url: string;
+  name: string;
+};
+
 export type LinkFolder = {
   id: string,
   userId: string,
@@ -5,4 +11,5 @@ export type LinkFolder = {
   name: string;
   createdAt: string;
   updatedAt: string;
+  links: Link[];
 };
