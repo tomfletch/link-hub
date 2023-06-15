@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { NewLinkForm } from '../NewLinkForm/NewLinkForm';
 import styles from './LinksList.module.css';
-import Favicon from '../Favicon/Favicon';
+import LinkItem from '../LinkItem/LinkItem';
 
 type LinksListProps = {
   currentFolderId: string;
@@ -26,13 +26,7 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
       <NewLinkForm linkFolderId={linkFolder.id} onAdd={() => mutate()} />
       <div className={styles.linksContainer}>
         {linkFolder.links.map((link) => (
-          <div key={link.id} className={styles.link}>
-            <div className={styles.faviconContainer}>
-              <Favicon url={link.url} size={32} />
-            </div>
-            <div className={styles.linkName}>{link.name}</div>
-            <div className={styles.linkUrl}>{link.url}</div>
-          </div>
+          <LinkItem key={link.id} {...link} />
         ))}
       </div>
     </div>
