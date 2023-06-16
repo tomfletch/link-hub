@@ -6,16 +6,28 @@ type ButtonProps = {
   children: ReactNode;
   onClick?: () => void;
   type?: 'submit' | 'button';
-  kind?: 'primary' | 'secondary';
+  kind?: 'primary' | 'secondary' | 'tertiary';
+  iconOnly?: boolean;
+  className?: string;
   disabled?: boolean;
   isLoading?: boolean;
   loadingText?: string;
 };
 
-export default function Button({ children, onClick, type = 'button', kind = 'primary', disabled = false, isLoading = false, loadingText }: ButtonProps) {
+export default function Button({ children, onClick, type = 'button', kind = 'primary', iconOnly = false, className = '', disabled = false, isLoading = false, loadingText }: ButtonProps) {
+  const classNames = [
+    styles.button,
+    styles[kind],
+    className
+  ];
+
+  if (iconOnly) {
+    classNames.push(styles.iconOnly);
+  }
+
   return (
     <button
-      className={`${styles.button} ${styles[kind]}`}
+      className={classNames.join(' ')}
       onClick={onClick}
       type={type}
       disabled={disabled || isLoading}

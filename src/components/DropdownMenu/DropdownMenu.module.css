@@ -1,0 +1,13 @@
+.dropdownMenuContainer {
+  position: relative;
+}
+
+.dropdownMenu {
+  position: absolute;
+  right: 0;
+}
+
+.dropdownMenuItem {
+  border-radius: 0;
+  width: 100%;
+}

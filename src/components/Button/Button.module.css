@@ -10,6 +10,10 @@
   padding: 0.5rem 1rem;
 }
 
+.button.iconOnly {
+  padding: 0.2rem;
+}
+
 .button.secondary {
   background-color: var(--clr-neutral-900);
 }
@@ -25,6 +29,15 @@
 
 .button.primary:hover, .button.primary:focus-visible {
   background-color: var(--clr-primary-500);
+}
+
+.button.tertiary {
+  background-color: var(--clr-neutral-300);
+  color: var(--clr-neutral-900);
+}
+
+.button.tertiary:hover, .button.tertiary:focus-visible {
+  background-color: var(--clr-primary-400);
 }
 
 .button:disabled, .button.primary:disabled, .button.secondary:disabled {
