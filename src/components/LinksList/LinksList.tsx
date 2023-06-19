@@ -18,6 +18,20 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
   if (isLoading) return <LoadingSpinner />;
   if (!linkFolder) return <h1>Link Folder Not Found</h1>;
 
+  const deleteLink = (deleteLinkId: string) => {
+    console.log('Delete link: ', deleteLinkId);
+    mutate(async () => {
+      await fetch(`/api/links/${deleteLinkId}`, {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
+      });
+      return undefined;
+    }, {
+      populateCache: false,
+      optimisticData: { ...linkFolder, links: linkFolder.links.filter((link) => link.id !== deleteLinkId)}
+    })
+  }
+
   return (
     <div>
       <header>
@@ -26,7 +40,7 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
       <NewLinkForm linkFolderId={linkFolder.id} onAdd={() => mutate()} />
       <div className={styles.linksContainer}>
         {linkFolder.links.map((link) => (
-          <LinkItem key={link.id} {...link} />
+          <LinkItem key={link.id} {...link} onDeleteClick={() => deleteLink(link.id)} />
         ))}
       </div>
     </div>

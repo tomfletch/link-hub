@@ -7,9 +7,10 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 type LinkItemProps = {
   url: string;
   name: string;
+  onDeleteClick: () => void;
 }
 
-export default function LinkItem({ url, name }: LinkItemProps) {
+export default function LinkItem({ url, name, onDeleteClick }: LinkItemProps) {
   return (
     <div className={styles.linkItem}>
       <div className={styles.faviconContainer}>
@@ -22,7 +23,7 @@ export default function LinkItem({ url, name }: LinkItemProps) {
           <DropdownMenu.Item>
             <VscEdit /> Edit
           </DropdownMenu.Item>
-          <DropdownMenu.Item>
+          <DropdownMenu.Item onClick={() => onDeleteClick()}>
             <VscTrash /> Delete
           </DropdownMenu.Item>
         </DropdownMenu>

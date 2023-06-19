@@ -45,12 +45,19 @@ function DropdownMenu({ label, iconOnly = false, children }: DropdownMenuProps) 
 }
 
 type DropdownMenuItemProps = {
+  onClick?: () => void;
   children: React.ReactNode;
 };
 
-DropdownMenu.Item = function DropdownMenuItem({ children }: DropdownMenuItemProps) {
+DropdownMenu.Item = function DropdownMenuItem({ onClick, children }: DropdownMenuItemProps) {
   return (
-    <Button className={styles.dropdownMenuItem} kind="secondary">{children}</Button>
+    <Button
+      className={styles.dropdownMenuItem}
+      kind="secondary"
+      onClick={onClick}
+    >
+      {children}
+    </Button>
   );
 }
 
