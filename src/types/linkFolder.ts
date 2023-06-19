@@ -12,4 +12,5 @@ export type LinkFolder = {
   createdAt: string;
   updatedAt: string;
   links: Link[];
+  childLinkFolders?: LinkFolder[];
 };

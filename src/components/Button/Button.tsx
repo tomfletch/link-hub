@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 import styles from './Button.module.css';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
 type ButtonProps = {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: 'submit' | 'button';
   kind?: 'primary' | 'secondary' | 'tertiary';
   iconOnly?: boolean;

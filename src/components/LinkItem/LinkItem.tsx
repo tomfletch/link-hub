@@ -3,6 +3,7 @@ import { HiDotsVertical } from 'react-icons/hi';
 import Favicon from '../Favicon/Favicon';
 import styles from './LinkItem.module.css';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import Link from 'next/link';
 
 type LinkItemProps = {
   url: string;
@@ -12,7 +13,7 @@ type LinkItemProps = {
 
 export default function LinkItem({ url, name, onDeleteClick }: LinkItemProps) {
   return (
-    <div className={styles.linkItem}>
+    <Link href={url} target="_blank" className={styles.linkItem}>
       <div className={styles.faviconContainer}>
         <Favicon url={url} size={32} />
       </div>
@@ -28,6 +29,6 @@ export default function LinkItem({ url, name, onDeleteClick }: LinkItemProps) {
           </DropdownMenu.Item>
         </DropdownMenu>
       </div>
-    </div>
+    </Link>
   );
 }

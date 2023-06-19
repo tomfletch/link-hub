@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, MouseEvent as ReactMouseEvent } from 'react';
 import Button from '../Button/Button';
 import styles from './DropdownMenu.module.css';
 
@@ -28,13 +28,14 @@ function DropdownMenu({ label, iconOnly = false, children }: DropdownMenuProps) 
     }
   })
 
-  const toggleOpen = () => {
+  const toggleOpen = (e: ReactMouseEvent) => {
+    e.preventDefault();
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }
 
   return (
     <div ref={dropdownRef} className={styles.dropdownMenuContainer}>
-      <Button kind="tertiary" onClick={() => toggleOpen()} iconOnly={iconOnly}>{label}</Button>
+      <Button kind="tertiary" onClick={(e) => toggleOpen(e)} iconOnly={iconOnly}>{label}</Button>
       {isOpen && (
         <div className={styles.dropdownMenu}>
           {children}
@@ -50,11 +51,16 @@ type DropdownMenuItemProps = {
 };
 
 DropdownMenu.Item = function DropdownMenuItem({ onClick, children }: DropdownMenuItemProps) {
+  const handleClick = (e: ReactMouseEvent) => {
+    e.preventDefault();
+    onClick && onClick();
+  };
+
   return (
     <Button
       className={styles.dropdownMenuItem}
       kind="secondary"
-      onClick={onClick}
+      onClick={handleClick}
     >
       {children}
     </Button>

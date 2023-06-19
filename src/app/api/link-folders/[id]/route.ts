@@ -8,7 +8,7 @@ type RouteParams = {
 export async function GET(request: Request, { params }: { params: RouteParams }) {
   const linkFolder = await prisma.linkFolder.findUnique({
     where: { id: params.id },
-    include: { links: true }
+    include: { links: true, childLinkFolders: true }
   });
 
   return NextResponse.json(linkFolder);

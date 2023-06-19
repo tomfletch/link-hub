@@ -7,6 +7,7 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 import { NewLinkForm } from '../NewLinkForm/NewLinkForm';
 import styles from './LinksList.module.css';
 import LinkItem from '../LinkItem/LinkItem';
+import LinkFolderItem from '../LinkFolderItem/LinkFolderItem';
 
 type LinksListProps = {
   currentFolderId: string;
@@ -38,6 +39,17 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
         <h1>{linkFolder.name}</h1>
       </header>
       <NewLinkForm linkFolderId={linkFolder.id} onAdd={() => mutate()} />
+      {linkFolder.childLinkFolders && linkFolder.childLinkFolders.length !== 0 && (
+        <div className={styles.linksContainer}>
+          {linkFolder.childLinkFolders?.map((linkFolder) => (
+            <LinkFolderItem
+              key={linkFolder.id}
+              id={linkFolder.id}
+              name={linkFolder.name}
+            />
+          ))}
+        </div>
+      )}
       <div className={styles.linksContainer}>
         {linkFolder.links.map((link) => (
           <LinkItem key={link.id} {...link} onDeleteClick={() => deleteLink(link.id)} />
