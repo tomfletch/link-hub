@@ -1,0 +1,22 @@
+.textInputContainer {
+  display: block;
+  position: relative;
+}
+
+.textInputContainer input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.textInputContainer span {
+  position: absolute;
+  left: 0.5rem;
+  top: -0.5rem;
+  padding-inline: 0.25rem;
+  background-color: var(--form-bg);
+  font-size: 0.9rem;
+}
+
+.textInputContainer:focus-within span {
+  color: var(--clr-primary-800);
+}

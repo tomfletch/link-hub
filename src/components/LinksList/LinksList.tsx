@@ -8,6 +8,11 @@ import { NewLinkForm } from '../NewLinkForm/NewLinkForm';
 import styles from './LinksList.module.css';
 import LinkItem from '../LinkItem/LinkItem';
 import LinkFolderItem from '../LinkFolderItem/LinkFolderItem';
+import Button from '../Button/Button';
+import { VscAdd, VscNewFolder } from 'react-icons/vsc';
+import Modal from '../Modal/Modal';
+import { useState } from 'react';
+import TextInput from '../TextInput/TextInput';
 
 type LinksListProps = {
   currentFolderId: string;
@@ -15,6 +20,9 @@ type LinksListProps = {
 
 export default function LinksList({ currentFolderId }: LinksListProps) {
   const { data: linkFolder, isLoading, mutate } = useSWR<LinkFolder>(`/api/link-folders/${currentFolderId}`, fetcher, {});
+  const [isNewFolderModalOpen, setIsNewFolderModalOpen] = useState(false);
+  const [newFolderName, setNewFolderName] = useState('');
+  const [isCreatingFolder, setIsCreatingFolder] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!linkFolder) return <h1>Link Folder Not Found</h1>;
@@ -35,8 +43,29 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
 
   return (
     <div>
-      <header>
+      <header className={styles.header}>
         <h1>{linkFolder.name}</h1>
+        <div className={styles.linkFolderOptions}>
+          <Button kind="secondary" onClick={() => setIsNewFolderModalOpen(true)}>
+            New Folder <VscNewFolder />
+          </Button>
+          <Modal isOpen={isNewFolderModalOpen} onClose={() => setIsNewFolderModalOpen(false)}>
+            <Modal.header>
+              <VscNewFolder /> Create a New Folder
+            </Modal.header>
+            <Modal.body>
+              <TextInput
+                label="Folder Name"
+                value={newFolderName}
+                setValue={setNewFolderName}
+                isDisabled={isCreatingFolder}
+              />
+            </Modal.body>
+            <Modal.footer>
+              <Button>Create Folder <VscAdd /></Button>
+            </Modal.footer>
+          </Modal>
+        </div>
       </header>
       <NewLinkForm linkFolderId={linkFolder.id} onAdd={() => mutate()} />
       {linkFolder.childLinkFolders && linkFolder.childLinkFolders.length !== 0 && (

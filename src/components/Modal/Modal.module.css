@@ -1,0 +1,29 @@
+.modalContainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: 999;
+}
+
+.modal {
+  width: 500px;
+  padding: 1rem;
+  color: var(--clr-neutral-900);
+  --form-bg: var(--clr-neutral-300);
+  background-color: var(--form-bg);
+  border-radius: var(--br-small);
+  display: grid;
+  gap: 2rem;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+}

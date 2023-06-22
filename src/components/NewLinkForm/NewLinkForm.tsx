@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { VscAdd } from 'react-icons/vsc';
 import Button from '../Button/Button';
 import styles from './NewLinkForm.module.css';
+import TextInput from '../TextInput/TextInput';
 
 type NewLinkFormProps = {
   linkFolderId: string;
@@ -30,30 +31,20 @@ export function NewLinkForm({ linkFolderId, onAdd }: NewLinkFormProps) {
   return (
     <form className={styles.newLinkForm} onSubmit={onAddLink}>
       <div className={styles.field}>
-        <label htmlFor="url">
-          <span>URL</span>
-          <input
-            id="url"
-            type="text"
-            value={url}
-            onChange={(e) => setURL(e.target.value)}
-            autoComplete="off"
-            disabled={isSaving}
-          />
-        </label>
+        <TextInput
+          label="URL"
+          value={url}
+          setValue={setURL}
+          isDisabled={isSaving}
+        />
       </div>
       <div className={styles.field}>
-        <label htmlFor="name">
-          <span>Name</span>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            autoComplete="off"
-            disabled={isSaving}
-          />
-        </label>
+        <TextInput
+          label="Name"
+          value={name}
+          setValue={setName}
+          isDisabled={isSaving}
+        />
       </div>
       <Button
         type="submit"
