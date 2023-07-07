@@ -5,6 +5,7 @@
 .dropdownMenu {
   position: absolute;
   right: 0;
+  width: max-content;
 }
 
 .dropdownMenuItem {

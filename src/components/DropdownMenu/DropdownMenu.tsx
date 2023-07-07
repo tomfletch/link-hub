@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, MouseEvent as ReactMouseEvent } from 'react';
+import React, { useEffect, useRef, useState, MouseEvent as ReactMouseEvent } from 'react';
 import Button from '../Button/Button';
 import styles from './DropdownMenu.module.css';
 
@@ -33,12 +33,20 @@ function DropdownMenu({ label, iconOnly = false, children }: DropdownMenuProps) 
     setIsOpen((prevIsOpen) => !prevIsOpen);
   }
 
+  const childrenWithProps = React.Children.map(children, (child) => {
+    if(React.isValidElement<DropdownMenuItemProps>(child)) {
+      return React.cloneElement(child, {
+        closeMenu: () => setIsOpen(false)
+      })
+    }
+  });
+
   return (
     <div ref={dropdownRef} className={styles.dropdownMenuContainer}>
       <Button kind="tertiary" onClick={(e) => toggleOpen(e)} iconOnly={iconOnly}>{label}</Button>
       {isOpen && (
         <div className={styles.dropdownMenu}>
-          {children}
+          {childrenWithProps}
         </div>
       )}
     </div>
@@ -47,13 +55,15 @@ function DropdownMenu({ label, iconOnly = false, children }: DropdownMenuProps) 
 
 type DropdownMenuItemProps = {
   onClick?: () => void;
+  closeMenu?: () => void;
   children: React.ReactNode;
 };
 
-DropdownMenu.Item = function DropdownMenuItem({ onClick, children }: DropdownMenuItemProps) {
+DropdownMenu.Item = function DropdownMenuItem({ onClick, closeMenu, children }: DropdownMenuItemProps) {
   const handleClick = (e: ReactMouseEvent) => {
     e.preventDefault();
-    onClick && onClick();
+    closeMenu?.();
+    onClick?.();
   };
 
   return (

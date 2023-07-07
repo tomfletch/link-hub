@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { LinkFolder } from '@/types/linkFolder';
 import fetcher from '@/utils';
 import useSWR from 'swr';
@@ -9,10 +10,10 @@ import styles from './LinksList.module.css';
 import LinkItem from '../LinkItem/LinkItem';
 import LinkFolderItem from '../LinkFolderItem/LinkFolderItem';
 import Button from '../Button/Button';
-import { VscAdd, VscNewFolder } from 'react-icons/vsc';
-import Modal from '../Modal/Modal';
-import { useState } from 'react';
-import TextInput from '../TextInput/TextInput';
+import { VscEdit, VscNewFolder, VscTrash } from 'react-icons/vsc';
+import CreateFolderModal from '../modals/CreateFolderModal/CreateFolderModal';
+import { HiDotsVertical } from 'react-icons/hi';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 type LinksListProps = {
   currentFolderId: string;
@@ -21,8 +22,6 @@ type LinksListProps = {
 export default function LinksList({ currentFolderId }: LinksListProps) {
   const { data: linkFolder, isLoading, mutate } = useSWR<LinkFolder>(`/api/link-folders/${currentFolderId}`, fetcher, {});
   const [isNewFolderModalOpen, setIsNewFolderModalOpen] = useState(false);
-  const [newFolderName, setNewFolderName] = useState('');
-  const [isCreatingFolder, setIsCreatingFolder] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!linkFolder) return <h1>Link Folder Not Found</h1>;
@@ -46,25 +45,19 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
       <header className={styles.header}>
         <h1>{linkFolder.name}</h1>
         <div className={styles.linkFolderOptions}>
-          <Button kind="secondary" onClick={() => setIsNewFolderModalOpen(true)}>
-            New Folder <VscNewFolder />
-          </Button>
-          <Modal isOpen={isNewFolderModalOpen} onClose={() => setIsNewFolderModalOpen(false)}>
-            <Modal.header>
-              <VscNewFolder /> Create a New Folder
-            </Modal.header>
-            <Modal.body>
-              <TextInput
-                label="Folder Name"
-                value={newFolderName}
-                setValue={setNewFolderName}
-                isDisabled={isCreatingFolder}
-              />
-            </Modal.body>
-            <Modal.footer>
-              <Button>Create Folder <VscAdd /></Button>
-            </Modal.footer>
-          </Modal>
+          <DropdownMenu label={<HiDotsVertical />} iconOnly>
+            <DropdownMenu.Item>
+              <VscEdit /> Edit
+            </DropdownMenu.Item>
+            <DropdownMenu.Item onClick={() => setIsNewFolderModalOpen(true)}>
+              <VscNewFolder /> New Folder
+            </DropdownMenu.Item>
+          </DropdownMenu>
+          <CreateFolderModal
+            parentId={linkFolder.id}
+            isOpen={isNewFolderModalOpen}
+            onClose={() => setIsNewFolderModalOpen(false)}
+          />
         </div>
       </header>
       <NewLinkForm linkFolderId={linkFolder.id} onAdd={() => mutate()} />
