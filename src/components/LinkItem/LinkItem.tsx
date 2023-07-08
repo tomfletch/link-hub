@@ -24,7 +24,7 @@ export default function LinkItem({ url, name, onDeleteClick }: LinkItemProps) {
           <DropdownMenu.Item>
             <VscEdit /> Edit
           </DropdownMenu.Item>
-          <DropdownMenu.Item onClick={() => onDeleteClick()}>
+          <DropdownMenu.Item onClick={() => onDeleteClick()} danger>
             <VscTrash /> Delete
           </DropdownMenu.Item>
         </DropdownMenu>
