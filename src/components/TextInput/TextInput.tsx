@@ -6,9 +6,10 @@ type TextInputProps = {
   value: string;
   setValue: (newValue: string) => void;
   isDisabled?: boolean;
+  autoFocus?: boolean;
 };
 
-export default function TextInput({ label, value, setValue, isDisabled = false }: TextInputProps) {
+export default function TextInput({ label, value, setValue, isDisabled = false, autoFocus = false }: TextInputProps) {
   const id = useId();
 
   return (
@@ -21,6 +22,7 @@ export default function TextInput({ label, value, setValue, isDisabled = false }
         onChange={(e) => setValue(e.target.value)}
         autoComplete="off"
         disabled={isDisabled}
+        autoFocus={autoFocus}
       />
     </label>
   );

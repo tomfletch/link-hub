@@ -42,6 +42,7 @@ export default function CreateFolderModal({ parentId, isOpen, onClose }: CreateF
             value={newFolderName}
             setValue={setNewFolderName}
             isDisabled={isCreatingFolder}
+            autoFocus
           />
         </Modal.Body>
         <Modal.Footer>
