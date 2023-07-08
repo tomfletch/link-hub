@@ -15,9 +15,22 @@ export async function GET(request: Request, { params }: { params: RouteParams })
 }
 
 export async function DELETE(request: Request, { params }: { params: RouteParams }) {
-  await prisma.linkFolder.delete({
-    where: { id: params.id }
+  await deleteFolderRecursively(params.id);
+  return new NextResponse(null, { status: 204 });
+}
+
+async function deleteFolderRecursively(folderId: string) {
+  const childFolders = await prisma.linkFolder.findMany({
+    where: {
+      parentLinkFolderId: folderId
+    }
   });
 
-  return new NextResponse(null, { status: 204 });
+  for (const childFolder of childFolders) {
+    await deleteFolderRecursively(childFolder.id);
+  }
+
+  await prisma.linkFolder.delete({
+    where: { id: folderId }
+  });
 }
