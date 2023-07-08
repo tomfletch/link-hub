@@ -45,7 +45,7 @@ export default function CreateFolderModal({ parentId, isOpen, onClose }: CreateF
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button type="submit">
+          <Button type="submit" isLoading={isCreatingFolder} loadingText="Creating Folder...">
             Create Folder <VscAdd />
           </Button>
         </Modal.Footer>
