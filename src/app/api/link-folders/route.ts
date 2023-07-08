@@ -9,7 +9,6 @@ type NewLinkFolder = {
 
 export async function POST(request: Request) {
   const newFolderInput = (await request.json()) as NewLinkFolder;
-  console.log(newFolderInput)
   const session = await getCurrentSession();
   if (!session) return;
 

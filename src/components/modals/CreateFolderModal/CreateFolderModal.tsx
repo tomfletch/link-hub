@@ -33,22 +33,22 @@ export default function CreateFolderModal({ parentId, isOpen, onClose }: CreateF
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={onCreateFolder}>
-        <Modal.header>
+        <Modal.Header>
           <VscNewFolder /> Create a New Folder
-        </Modal.header>
-        <Modal.body>
+        </Modal.Header>
+        <Modal.Body>
           <TextInput
             label="Folder Name"
             value={newFolderName}
             setValue={setNewFolderName}
             isDisabled={isCreatingFolder}
           />
-        </Modal.body>
-        <Modal.footer>
+        </Modal.Body>
+        <Modal.Footer>
           <Button type="submit">
             Create Folder <VscAdd />
           </Button>
-        </Modal.footer>
+        </Modal.Footer>
       </form>
     </Modal>
   );

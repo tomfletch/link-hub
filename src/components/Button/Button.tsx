@@ -6,7 +6,7 @@ type ButtonProps = {
   children: ReactNode;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: 'submit' | 'button';
-  kind?: 'primary' | 'secondary' | 'tertiary';
+  kind?: 'primary' | 'secondary' | 'tertiary' | 'danger';
   iconOnly?: boolean;
   className?: string;
   disabled?: boolean;

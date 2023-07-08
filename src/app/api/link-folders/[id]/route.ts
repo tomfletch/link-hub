@@ -13,3 +13,11 @@ export async function GET(request: Request, { params }: { params: RouteParams })
 
   return NextResponse.json(linkFolder);
 }
+
+export async function DELETE(request: Request, { params }: { params: RouteParams }) {
+  await prisma.linkFolder.delete({
+    where: { id: params.id }
+  });
+
+  return new NextResponse(null, { status: 204 });
+}

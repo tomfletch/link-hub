@@ -12,6 +12,9 @@
   --clr-primary-900: hsl(235, 60%, 95%);
   --clr-secondary-400: hsl(225, 27%, 55%);
 
+  --clr-danger-400: hsl(354, 77%, 40%);
+  --clr-danger-500: hsl(354, 77%, 50%);
+
   --fw-regular: 400;
   --fw-bold: 700;
 

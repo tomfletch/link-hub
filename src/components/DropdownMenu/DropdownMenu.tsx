@@ -56,10 +56,11 @@ function DropdownMenu({ label, iconOnly = false, children }: DropdownMenuProps) 
 type DropdownMenuItemProps = {
   onClick?: () => void;
   closeMenu?: () => void;
+  danger?: boolean;
   children: React.ReactNode;
 };
 
-DropdownMenu.Item = function DropdownMenuItem({ onClick, closeMenu, children }: DropdownMenuItemProps) {
+DropdownMenu.Item = function DropdownMenuItem({ onClick, closeMenu, danger = false, children }: DropdownMenuItemProps) {
   const handleClick = (e: ReactMouseEvent) => {
     e.preventDefault();
     closeMenu?.();
@@ -68,7 +69,7 @@ DropdownMenu.Item = function DropdownMenuItem({ onClick, closeMenu, children }: 
 
   return (
     <Button
-      className={styles.dropdownMenuItem}
+      className={`${styles.dropdownMenuItem} ${danger ? styles.danger : ''}`}
       kind="secondary"
       onClick={handleClick}
     >

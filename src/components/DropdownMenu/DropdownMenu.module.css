@@ -12,3 +12,7 @@
   border-radius: 0;
   width: 100%;
 }
+
+.danger {
+  color: var(--clr-danger-400);
+}

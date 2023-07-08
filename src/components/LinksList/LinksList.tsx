@@ -9,25 +9,27 @@ import { NewLinkForm } from '../NewLinkForm/NewLinkForm';
 import styles from './LinksList.module.css';
 import LinkItem from '../LinkItem/LinkItem';
 import LinkFolderItem from '../LinkFolderItem/LinkFolderItem';
-import Button from '../Button/Button';
 import { VscEdit, VscNewFolder, VscTrash } from 'react-icons/vsc';
 import CreateFolderModal from '../modals/CreateFolderModal/CreateFolderModal';
 import { HiDotsVertical } from 'react-icons/hi';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import DeleteConfirmationModal from '../modals/DeleteConfirmationModal/DeleteConfirmationModal';
+import { useRouter } from 'next/navigation';
 
 type LinksListProps = {
   currentFolderId: string;
 };
 
 export default function LinksList({ currentFolderId }: LinksListProps) {
+  const router = useRouter();
   const { data: linkFolder, isLoading, mutate } = useSWR<LinkFolder>(`/api/link-folders/${currentFolderId}`, fetcher, {});
   const [isNewFolderModalOpen, setIsNewFolderModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
   if (!linkFolder) return <h1>Link Folder Not Found</h1>;
 
   const deleteLink = (deleteLinkId: string) => {
-    console.log('Delete link: ', deleteLinkId);
     mutate(async () => {
       await fetch(`/api/links/${deleteLinkId}`, {
         method: 'DELETE',
@@ -52,11 +54,20 @@ export default function LinksList({ currentFolderId }: LinksListProps) {
             <DropdownMenu.Item onClick={() => setIsNewFolderModalOpen(true)}>
               <VscNewFolder /> New Folder
             </DropdownMenu.Item>
+            <DropdownMenu.Item onClick={() => setIsDeleteModalOpen(true)} danger>
+              <VscTrash /> Delete
+            </DropdownMenu.Item>
           </DropdownMenu>
           <CreateFolderModal
             parentId={linkFolder.id}
             isOpen={isNewFolderModalOpen}
             onClose={() => setIsNewFolderModalOpen(false)}
+          />
+          <DeleteConfirmationModal
+            linkFolderId={linkFolder.id}
+            isOpen={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            onDelete={() => router.push(`/folders/${linkFolder.parentLinkFolderId}`)}
           />
         </div>
       </header>
