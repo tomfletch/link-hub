@@ -27,6 +27,11 @@
   margin-bottom: 2rem;
 }
 
+.modalBody {
+  display: grid;
+  gap: 1rem;
+}
+
 .modalFooter {
   margin-top: 2rem;
   display: flex;
